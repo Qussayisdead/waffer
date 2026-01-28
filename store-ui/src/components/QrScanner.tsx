@@ -18,6 +18,10 @@ type BarcodeDetectorType = new (args: { formats: string[] }) => {
   detect: (source: HTMLVideoElement | ImageBitmap) => Promise<{ rawValue: string }[]>;
 };
 
+type BarcodeDetectorGlobal = Window & typeof globalThis & {
+  BarcodeDetector?: BarcodeDetectorType;
+};
+
 function parsePayload(raw: string): ScanPayload | null {
   if (raw.length > 3) {
     return {
@@ -39,7 +43,8 @@ export function QrScanner({ onScan }: QrScannerProps) {
   const [usbValue, setUsbValue] = useState("");
   const apiBase = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
 
-  const supportsDetector = typeof window !== "undefined" && "BarcodeDetector" in window;
+  const supportsDetector =
+    typeof window !== "undefined" && "BarcodeDetector" in (window as BarcodeDetectorGlobal);
   const supportsImageUpload = supportsDetector && typeof window.createImageBitmap === "function";
 
   const stopScan = () => {
@@ -70,7 +75,11 @@ export function QrScanner({ onScan }: QrScannerProps) {
         await videoRef.current.play();
       }
 
-      const Detector = window.BarcodeDetector as BarcodeDetectorType;
+      const Detector = (window as BarcodeDetectorGlobal).BarcodeDetector;
+      if (!Detector) {
+        setError(t("scan.notSupported"));
+        return;
+      }
       const detector = new Detector({ formats: ["qr_code"] });
       intervalRef.current = window.setInterval(async () => {
         if (!videoRef.current) return;
@@ -100,7 +109,11 @@ export function QrScanner({ onScan }: QrScannerProps) {
       setError(null);
       if (supportsImageUpload) {
         const bitmap = await createImageBitmap(file);
-        const Detector = window.BarcodeDetector as BarcodeDetectorType;
+        const Detector = (window as BarcodeDetectorGlobal).BarcodeDetector;
+        if (!Detector) {
+          setError(t("scan.notSupported"));
+          return;
+        }
         const detector = new Detector({ formats: ["qr_code"] });
         const codes = await detector.detect(bitmap);
         if (codes.length > 0) {

@@ -1,0 +1,82 @@
+{
+  "errors": {
+    "internal": "Unexpected error",
+    "validation": "Invalid data"
+  },
+  "validation": {
+    "required": "Field is required",
+    "percentRange": "Percent must be between 0 and 100",
+    "email": "Email is invalid",
+    "phone": "Phone is invalid",
+    "uuid": "ID is invalid",
+    "amount": "Amount is invalid"
+  },
+  "store": {
+    "created": "Store created",
+    "updated": "Store updated",
+    "deleted": "Store deactivated",
+    "fetched": "Store fetched",
+    "listed": "Stores fetched",
+    "notFound": "Store not found"
+  },
+  "customer": {
+    "created": "Customer created",
+    "updated": "Customer updated",
+    "deleted": "Customer deleted",
+    "fetched": "Customer fetched",
+    "listed": "Customers fetched",
+    "notFound": "Customer not found"
+  },
+  "card": {
+    "issued": "Card issued",
+    "updated": "Card updated",
+    "fetched": "Card fetched",
+    "listed": "Cards fetched",
+    "notFound": "Card not found",
+    "inactive": "Card inactive",
+    "expired": "Card expired"
+  },
+  "invoice": {
+    "created": "Invoice created"
+  },
+  "reports": {
+    "fetched": "Reports fetched",
+    "totalSales": "Total sales",
+    "discounts": "Total discounts",
+    "invoiceCount": "Invoice count"
+  },
+  "qr": {
+    "invalid": "Invalid QR code",
+    "listed": "QR codes fetched"
+  },
+  "auth": {
+    "invalid": "Invalid login credentials",
+    "unauthorized": "Please sign in",
+    "forbidden": "Forbidden",
+    "created": "User created",
+    "loginSuccess": "Signed in"
+  },
+  "users": {
+    "fetched": "Users fetched"
+  },
+  "ads": {
+    "created": "Ad created",
+    "updated": "Ad updated",
+    "deleted": "Ad disabled",
+    "listed": "Ads fetched"
+  },
+  "storage": {
+    "notConfigured": "Storage is not configured"
+  },
+  "reward": {
+    "created": "Reward created",
+    "updated": "Reward updated",
+    "deleted": "Reward disabled",
+    "listed": "Rewards fetched"
+  },
+  "cardApplication": {
+    "created": "Application submitted",
+    "listed": "Applications fetched",
+    "updated": "Application updated"
+  }
+}

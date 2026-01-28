@@ -1,0 +1,157 @@
+{
+  "app": {
+    "title": "Store Terminal - Savings Card Network",
+    "subtitle": "Just two steps: scan the card and enter the amount"
+  },
+  "scan": {
+    "title": "Scan QR Code",
+    "start": "Start Scan",
+    "stop": "Stop Scan",
+    "ready": "Point the camera at the card QR",
+    "last": "Last scanned card",
+    "notSupported": "Your device does not support QR scanning",
+    "invalid": "Invalid QR code, try again",
+    "required": "Please scan the card first",
+    "upload": "Upload QR image",
+    "uploadHint": "Fallback if camera is unavailable",
+    "uploadUnsupported": "Image upload not supported in this browser",
+    "usbTitle": "USB Scanner",
+    "usbHint": "Focus here, then scan the card",
+    "usbPlaceholder": "Scan here"
+  },
+  "customer": {
+    "name": "Customer Name",
+    "discount": "Discount Rate",
+    "points": "Points"
+  },
+  "store": {
+    "name": "Store Name",
+    "cashier": "Cashier"
+  },
+  "invoice": {
+    "title": "Create Invoice",
+    "amount": "Amount before discount",
+    "currency": "Currency",
+    "create": "Calculate discount",
+    "final": "Final amount",
+    "discountAmount": "Discount amount",
+    "printReceipt": "Print receipt"
+  },
+  "result": {
+    "title": "Result",
+    "success": "Invoice calculated successfully",
+    "congrats": "Congrats {customer}! You saved {amount} shekel"
+  },
+  "errors": {
+    "generic": "Unexpected error",
+    "camera": "Unable to access camera",
+    "network": "Unable to reach server",
+    "unauthorized": "Please sign in"
+  },
+  "auth": {
+    "title": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "qr": {
+    "invalid": "Invalid QR code, try again"
+  },
+  "customerOtp": {
+    "generate": "Generate new QR",
+    "generating": "Generating...",
+    "expiresAt": "Expires at",
+    "qrToken": "QR token",
+    "notReady": "Generate a new QR to use at the cashier"
+  },
+  "storeOtp": {
+    "title": "Generate customer QR",
+    "subtitle": "Create a one-time QR using customer phone or email",
+    "identifier": "Phone or email",
+    "generate": "Generate QR",
+    "generating": "Generating...",
+    "qrToken": "QR token",
+    "expiresAt": "Expires at",
+    "required": "Phone or email is required"
+  },
+  "points": {
+    "title": "Points Balance",
+    "subtitle": "Earn points from savings after each invoice",
+    "rate": "Every 10 shekels saved = 1 point",
+    "redeemCta": "Redeem",
+    "redeemLoading": "Redeeming...",
+    "redeemSuccess": "Points redeemed",
+    "historyTitle": "Rewards history",
+    "historyNote": "Last 50 entries",
+    "historyEmpty": "No points activity yet",
+    "historyEarn": "Points earned",
+    "historyRedeem": "Points redeemed",
+    "rewardsTitle": "Rewards catalog",
+    "rewardsHint": "Redeem your points for vouchers from participating stores",
+    "rewardsEmpty": "No rewards available",
+    "pointsLabel": "points",
+    "vouchersTitle": "My vouchers",
+    "vouchersNote": "One-time use vouchers",
+    "vouchersEmpty": "No vouchers yet",
+    "voucherExpires": "Expires",
+    "voucherRemaining": "Remaining",
+    "days": "days",
+    "filterLabel": "Filter by store",
+    "filterAll": "All stores",
+    "unknownStore": "Other",
+    "refresh": "Refresh"
+  },
+  "storeSummary": {
+    "title": "Store summary",
+    "subtitle": "Last 30 days performance",
+    "refresh": "Refresh",
+    "loading": "Refreshing...",
+    "subtotal": "Subtotal",
+    "discounts": "Discounts",
+    "sales": "Sales",
+    "commissions": "Commissions",
+    "invoiceCount": "Invoices",
+    "day": "Day",
+    "empty": "No data yet"
+  },
+  "common": {
+    "hello": "Hello",
+    "user": "User"
+  },
+  "storeNav": {
+    "summary": "Store analytics",
+    "qr": "Create QR",
+    "invoices": "Recent invoices",
+    "search": "Search card",
+    "scans": "Scan history"
+  },
+  "terminal": {
+    "recentInvoicesTitle": "Recent invoices",
+    "recentInvoicesEmpty": "No invoices yet",
+    "searchTitle": "Search card or customer",
+    "searchHint": "Search by card number, name, phone, or email",
+    "searchPlaceholder": "Card number, name, phone, or email",
+    "searchButton": "Search",
+    "searchEmpty": "No results",
+    "scanHistoryTitle": "Scan history",
+    "scanHistoryEmpty": "No scans yet",
+    "customer": "Customer",
+    "cardNumber": "Card number",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "createdAt": "Created",
+    "usedAt": "Used",
+    "source": "Source",
+    "sourceStore": "Store",
+    "sourceCustomer": "Customer",
+    "status": "Status",
+    "phone": "Phone",
+    "email": "Email"
+  },
+  "card": {
+    "expired": "Card expired",
+    "inactive": "Card inactive"
+  }
+}

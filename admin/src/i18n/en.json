@@ -1,0 +1,109 @@
+{
+  "app": {
+    "name": "Admin Dashboard - Savings Card",
+    "tagline": "Smart platform for discounts and customer cards"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "stores": "Stores",
+    "customersCards": "Customers & Cards",
+    "reports": "Reports",
+    "users": "Users",
+    "monthlyStatement": "Monthly Statement"
+  },
+  "actions": {
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "refresh": "Refresh",
+    "update": "Update",
+    "all": "All"
+  },
+  "stores": {
+    "title": "Stores Management",
+    "nameAr": "Store Name (Arabic)",
+    "nameEn": "Store Name (English)",
+    "maxDiscount": "Max Discount (%)",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "customers": {
+    "title": "Customers Management",
+    "nameAr": "Customer Name (Arabic)",
+    "nameEn": "Customer Name (English)",
+    "phone": "Phone",
+    "email": "Email",
+    "discount": "Discount (%)"
+  },
+  "cards": {
+    "title": "Cards",
+    "issue": "Issue Card",
+    "customerId": "Customer ID",
+    "storeId": "Store ID",
+    "cardNumber": "Card Number",
+    "qrToken": "QR Token",
+    "downloadPng": "Download PNG",
+    "downloadSvg": "Download SVG",
+    "printPdf": "Print / Save PDF",
+    "issuedCard": "Issued card",
+    "holder": "Card Holder",
+    "store": "Store",
+    "filterStore": "Filter by store",
+    "statusLabel": "Status",
+    "status": "Card Status",
+    "active": "Active",
+    "blocked": "Blocked",
+    "expired": "Expired"
+  },
+  "reports": {
+    "title": "Reports Dashboard",
+    "sales": "Total Sales",
+    "discounts": "Total Discounts",
+    "activeCards": "Active Cards",
+    "stores": "Store Count",
+    "monthlyTitle": "Monthly Store Statement",
+    "storeLabel": "Store",
+    "monthLabel": "Month",
+    "yearLabel": "Year",
+    "period": "Period",
+    "subtotal": "Subtotal",
+    "invoiceCount": "Invoice Count",
+    "averageTicket": "Average Ticket",
+    "averageDiscountPercent": "Average Discount %",
+    "dailyBreakdown": "Daily Breakdown",
+    "exportPdf": "Export PDF",
+    "print": "Print",
+    "networkTitle": "Network Report",
+    "networkSubtitle": "Sales and discounts by region, highlighting top stores.",
+    "north": "North Region",
+    "central": "Central Region",
+    "west": "West Region"
+  },
+  "errors": {
+    "generic": "Unexpected error, please try again",
+    "network": "Unable to reach server",
+    "unauthorized": "Please sign in",
+    "forbidden": "Forbidden"
+  },
+  "auth": {
+    "title": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "users": {
+    "title": "Users",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role",
+    "admin": "Admin",
+    "store": "Store cashier",
+    "storeId": "Store ID"
+  }
+}

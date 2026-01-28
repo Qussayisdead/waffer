@@ -1,0 +1,109 @@
+{
+  "app": {
+    "name": "لوحة الادارة - بطاقة التوفير",
+    "tagline": "منصة ذكية لإدارة الخصومات وبطاقات العملاء"
+  },
+  "nav": {
+    "dashboard": "الرئيسية",
+    "stores": "المتاجر",
+    "customersCards": "العملاء والبطاقات",
+    "reports": "التقارير",
+    "users": "المستخدمين",
+    "monthlyStatement": "كشف شهري"
+  },
+  "actions": {
+    "create": "إضافة",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "search": "بحث",
+    "refresh": "تحديث",
+    "update": "تحديث",
+    "all": "الكل"
+  },
+  "stores": {
+    "title": "إدارة المتاجر",
+    "nameAr": "اسم المتجر (عربي)",
+    "nameEn": "اسم المتجر (إنجليزي)",
+    "maxDiscount": "أقصى خصم (%)",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط"
+  },
+  "customers": {
+    "title": "إدارة العملاء",
+    "nameAr": "اسم العميل (عربي)",
+    "nameEn": "اسم العميل (إنجليزي)",
+    "phone": "رقم الجوال",
+    "email": "البريد الإلكتروني",
+    "discount": "نسبة الخصم (%)"
+  },
+  "cards": {
+    "title": "البطاقات",
+    "issue": "إصدار بطاقة",
+    "customerId": "معرف العميل",
+    "storeId": "معرف المتجر",
+    "cardNumber": "رقم البطاقة",
+    "qrToken": "رمز QR",
+    "downloadPng": "تحميل PNG",
+    "downloadSvg": "تحميل SVG",
+    "printPdf": "طباعة / حفظ PDF",
+    "issuedCard": "بطاقة صادرة",
+    "holder": "اسم حامل البطاقة",
+    "store": "المتجر",
+    "filterStore": "تصفية حسب المتجر",
+    "statusLabel": "الحالة",
+    "status": "حالة البطاقة",
+    "active": "مفعلة",
+    "blocked": "موقوفة",
+    "expired": "منتهية"
+  },
+  "reports": {
+    "title": "لوحة التقارير",
+    "sales": "إجمالي المبيعات",
+    "discounts": "إجمالي الخصومات",
+    "activeCards": "البطاقات المفعلة",
+    "stores": "عدد المتاجر",
+    "monthlyTitle": "كشف شهري للمتاجر",
+    "storeLabel": "المتجر",
+    "monthLabel": "الشهر",
+    "yearLabel": "السنة",
+    "period": "الفترة",
+    "subtotal": "إجمالي قبل الخصم",
+    "invoiceCount": "عدد الفواتير",
+    "averageTicket": "متوسط الفاتورة",
+    "averageDiscountPercent": "متوسط نسبة الخصم",
+    "dailyBreakdown": "تفاصيل يومية",
+    "exportPdf": "تصدير PDF",
+    "print": "طباعة",
+    "networkTitle": "تقرير الشبكة",
+    "networkSubtitle": "توزيع المبيعات والخصومات حسب المناطق والمتاجر الأكثر نشاطاً.",
+    "north": "المنطقة الشمالية",
+    "central": "المنطقة الوسطى",
+    "west": "المنطقة الغربية"
+  },
+  "errors": {
+    "generic": "حدث خطأ غير متوقع، يرجى المحاولة لاحقاً",
+    "network": "تعذر الاتصال بالخادم",
+    "unauthorized": "يرجى تسجيل الدخول",
+    "forbidden": "غير مصرح لك"
+  },
+  "auth": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "login": "دخول",
+    "logout": "تسجيل الخروج"
+  },
+  "users": {
+    "title": "إدارة المستخدمين",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "role": "الدور",
+    "admin": "مشرف",
+    "store": "كاشير متجر",
+    "storeId": "معرف المتجر"
+  }
+}

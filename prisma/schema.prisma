@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id                   String   @id @default(uuid())
+  name_ar              String
+  name_en              String?
+  max_discount_percent Decimal
+  commission_percent   Decimal  @default(0)
+  is_active            Boolean  @default(true)
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+  cards                Card[]
+  invoices             Invoice[]
+  users                User[]
+  rewards              RewardItem[]
+  audit_logs           AuditLog[]  @relation("StoreAudit")
+}
+
+model Customer {
+  id                       String   @id @default(uuid())
+  name_ar                  String
+  name_en                  String?
+  phone                    String?  @unique
+  email                    String?  @unique
+  password_hash            String?
+  default_discount_percent Decimal
+  points_balance           Int      @default(0)
+  preferred_lang           String   @default("ar")
+  created_at               DateTime @default(now())
+  updated_at               DateTime @updatedAt
+  cards                    Card[]
+  invoices                 Invoice[]
+  points_transactions      PointsTransaction[]
+  vouchers                 CustomerVoucher[]
+}
+
+model Card {
+  id          String   @id @default(uuid())
+  customer_id String
+  store_id    String
+  card_number String   @unique
+  qr_token    String   @unique
+  status      String   @default("active")
+  issued_at   DateTime @default(now())
+  expires_at  DateTime?
+  customer    Customer @relation(fields: [customer_id], references: [id])
+  store       Store    @relation(fields: [store_id], references: [id])
+  invoices    Invoice[]
+  qr_tokens   CardQrToken[]
+}
+
+model CardApplication {
+  id         String   @id @default(uuid())
+  name       String
+  phone      String?
+  email      String?
+  city       String?
+  status     String   @default("pending")
+  card_type  String   @default("golden")
+  created_at DateTime @default(now())
+}
+
+model CardQrToken {
+  id         String   @id @default(uuid())
+  card_id    String
+  token      String   @unique
+  source     String   @default("customer")
+  expires_at DateTime
+  used_at    DateTime?
+  created_at DateTime @default(now())
+  card       Card     @relation(fields: [card_id], references: [id])
+}
+
+model Invoice {
+  id                        String   @id @default(uuid())
+  store_id                  String
+  customer_id               String
+  card_id                   String?
+  subtotal                  Decimal
+  discount_percent_applied  Decimal
+  discount_amount           Decimal
+  total                     Decimal
+  currency                  String   @default("ILS")
+  points_earned             Int      @default(0)
+  commission_amount         Decimal  @default(0)
+  created_at                DateTime @default(now())
+  store                     Store    @relation(fields: [store_id], references: [id])
+  customer                  Customer @relation(fields: [customer_id], references: [id])
+  card                      Card?    @relation(fields: [card_id], references: [id])
+  points_transactions       PointsTransaction[]
+}
+
+model RewardItem {
+  id           String   @id @default(uuid())
+  store_id     String?
+  name_ar      String
+  name_en      String?
+  type         String
+  points_cost  Int
+  value_amount Decimal
+  currency     String   @default("ILS")
+  expiry_days  Int      @default(7)
+  is_active    Boolean  @default(true)
+  created_at   DateTime @default(now())
+  store        Store?   @relation(fields: [store_id], references: [id])
+  vouchers     CustomerVoucher[]
+}
+
+model CustomerVoucher {
+  id           String   @id @default(uuid())
+  customer_id  String
+  reward_id    String
+  code         String   @unique
+  value_amount Decimal
+  currency     String   @default("ILS")
+  expires_at   DateTime
+  used_at      DateTime?
+  created_at   DateTime @default(now())
+  customer     Customer @relation(fields: [customer_id], references: [id])
+  reward       RewardItem @relation(fields: [reward_id], references: [id])
+}
+
+model PointsTransaction {
+  id          String   @id @default(uuid())
+  customer_id String
+  invoice_id  String?
+  type        String
+  points      Int
+  created_at  DateTime @default(now())
+  customer    Customer @relation(fields: [customer_id], references: [id])
+  invoice     Invoice? @relation(fields: [invoice_id], references: [id])
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  role          String
+  store_id      String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  store         Store?   @relation(fields: [store_id], references: [id])
+  audit_logs    AuditLog[]
+}
+
+model Ad {
+  id         String   @id @default(uuid())
+  title      String
+  body       String
+  link_url   String?
+  image_url  String?
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  actor_id   String?
+  actor_role String?
+  store_id   String?
+  action     String
+  entity     String
+  entity_id  String?
+  meta       Json?
+  created_at DateTime @default(now())
+  actor      User?    @relation(fields: [actor_id], references: [id])
+  store      Store?   @relation("StoreAudit", fields: [store_id], references: [id])
+}

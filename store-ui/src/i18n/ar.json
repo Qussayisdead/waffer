@@ -1,0 +1,157 @@
+{
+  "app": {
+    "title": "لوحة المتجر - شبكة بطاقة التوفير",
+    "subtitle": "خطوتان فقط: امسح البطاقة وأدخل المبلغ"
+  },
+  "scan": {
+    "title": "مسح رمز QR",
+    "start": "بدء المسح",
+    "stop": "إيقاف المسح",
+    "ready": "وجّه الكاميرا نحو رمز البطاقة",
+    "last": "آخر بطاقة تم مسحها",
+    "notSupported": "جهازك لا يدعم مسح QR",
+    "invalid": "رمز QR غير صالح، حاول مرة أخرى",
+    "required": "يرجى مسح البطاقة أولا",
+    "upload": "رفع صورة QR",
+    "uploadHint": "بديل عند تعذر استخدام الكاميرا",
+    "uploadUnsupported": "رفع الصور غير مدعوم في هذا المتصفح",
+    "usbTitle": "ماسح USB",
+    "usbHint": "ضع المؤشر هنا ثم امسح البطاقة",
+    "usbPlaceholder": "امسح هنا"
+  },
+  "customer": {
+    "name": "اسم العميل",
+    "discount": "نسبة الخصم",
+    "points": "النقاط"
+  },
+  "store": {
+    "name": "اسم المتجر",
+    "cashier": "اسم الكاشير"
+  },
+  "invoice": {
+    "title": "إنشاء فاتورة",
+    "amount": "المبلغ قبل الخصم",
+    "currency": "العملة",
+    "create": "حساب الخصم",
+    "final": "المبلغ النهائي",
+    "discountAmount": "مبلغ الخصم",
+    "printReceipt": "طباعة الإيصال"
+  },
+  "result": {
+    "title": "النتيجة",
+    "success": "تم احتساب الفاتورة بنجاح",
+    "congrats": "مبروك {customer}! وفرت {amount} شيكل"
+  },
+  "errors": {
+    "generic": "خطأ غير متوقع، حاول مرة أخرى",
+    "camera": "تعذر الوصول للكاميرا",
+    "network": "تعذر الوصول إلى الخادم",
+    "unauthorized": "يرجى تسجيل الدخول"
+  },
+  "auth": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "login": "دخول",
+    "logout": "تسجيل الخروج"
+  },
+  "qr": {
+    "invalid": "رمز QR غير صالح، حاول مرة أخرى"
+  },
+  "customerOtp": {
+    "generate": "توليد رمز جديد",
+    "generating": "جار التوليد...",
+    "expiresAt": "ينتهي عند",
+    "qrToken": "رمز QR",
+    "notReady": "ولد رمز QR جديد لتقديمه للكاشير"
+  },
+  "storeOtp": {
+    "title": "توليد QR للعميل",
+    "subtitle": "أنشئ رمز QR لمرة واحدة باستخدام هاتف العميل أو بريده",
+    "identifier": "هاتف أو بريد",
+    "generate": "توليد رمز QR",
+    "generating": "جار التوليد...",
+    "qrToken": "رمز QR",
+    "expiresAt": "ينتهي عند",
+    "required": "الهاتف أو البريد مطلوب"
+  },
+  "points": {
+    "title": "رصيد النقاط",
+    "subtitle": "تضاف النقاط بعد كل فاتورة",
+    "rate": "كل 10 شيكل توفير = نقطة واحدة",
+    "redeemCta": "استبدال",
+    "redeemLoading": "جار الاستبدال...",
+    "redeemSuccess": "تم استبدال النقاط",
+    "historyTitle": "سجل المكافآت",
+    "historyNote": "آخر 50 عملية",
+    "historyEmpty": "لا يوجد نشاط نقاط بعد",
+    "historyEarn": "نقاط مكتسبة",
+    "historyRedeem": "نقاط مستبدلة",
+    "rewardsTitle": "دليل المكافآت",
+    "rewardsHint": "استبدل نقاطك بقسائم من المتاجر المشاركة",
+    "rewardsEmpty": "لا توجد مكافآت متاحة",
+    "pointsLabel": "نقطة",
+    "vouchersTitle": "قسائمي",
+    "vouchersNote": "قسائم للاستخدام مرة واحدة",
+    "vouchersEmpty": "لا توجد قسائم بعد",
+    "voucherExpires": "ينتهي",
+    "voucherRemaining": "المتبقي",
+    "days": "يوم",
+    "filterLabel": "تصفية حسب المتجر",
+    "filterAll": "كل المتاجر",
+    "unknownStore": "أخرى",
+    "refresh": "تحديث"
+  },
+  "storeSummary": {
+    "title": "ملخص المتجر",
+    "subtitle": "أداء آخر 30 يوما",
+    "refresh": "تحديث",
+    "loading": "جار التحديث...",
+    "subtotal": "الإجمالي قبل الخصم",
+    "discounts": "إجمالي الخصومات",
+    "sales": "إجمالي المبيعات",
+    "commissions": "العمولة",
+    "invoiceCount": "عدد الفواتير",
+    "day": "اليوم",
+    "empty": "لا توجد بيانات بعد"
+  },
+  "common": {
+    "hello": "مرحبا",
+    "user": "المستخدم"
+  },
+  "storeNav": {
+    "summary": "تحليل المتجر",
+    "qr": "إنشاء QR",
+    "invoices": "الفواتير الأخيرة",
+    "search": "بحث عن بطاقة",
+    "scans": "سجل المسح"
+  },
+  "terminal": {
+    "recentInvoicesTitle": "آخر الفواتير",
+    "recentInvoicesEmpty": "لا توجد فواتير بعد",
+    "searchTitle": "بحث عن بطاقة أو عميل",
+    "searchHint": "ابحث برقم البطاقة أو الاسم أو الهاتف أو البريد",
+    "searchPlaceholder": "رقم البطاقة أو الاسم أو الهاتف أو البريد",
+    "searchButton": "بحث",
+    "searchEmpty": "لا توجد نتائج",
+    "scanHistoryTitle": "سجل المسح",
+    "scanHistoryEmpty": "لا يوجد مسح بعد",
+    "customer": "العميل",
+    "cardNumber": "رقم البطاقة",
+    "subtotal": "الإجمالي قبل الخصم",
+    "discount": "الخصم",
+    "total": "الإجمالي",
+    "createdAt": "التاريخ",
+    "usedAt": "وقت الاستخدام",
+    "source": "المصدر",
+    "sourceStore": "من المتجر",
+    "sourceCustomer": "من العميل",
+    "status": "الحالة",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني"
+  },
+  "card": {
+    "expired": "البطاقة منتهية",
+    "inactive": "البطاقة غير نشطة"
+  }
+}

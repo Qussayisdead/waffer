@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --brand-green: #22c55e;
+  --brand-green-soft: #dcfce7;
+}
+
+body {
+  font-family: "Tajawal", "Cairo", "Noto Kufi Arabic", "Segoe UI", Tahoma, sans-serif;
+  background:
+    radial-gradient(900px 600px at 95% -10%, rgba(34, 197, 94, 0.15) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(1100px 700px at 95% -20%, #f6f0e4 0%, #f4f3ef 40%, #ecf0f3 100%);
+  color: #1c1f2a;
+}
+
+.admin-shell {
+  background:
+    radial-gradient(900px 600px at 90% -10%, rgba(34, 197, 94, 0.18) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(1200px 800px at 90% -10%, #f8efe0 0%, #f4f0ea 40%, #eef2f3 100%);
+  color: #1a1a1a;
+}
+
+.glass {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(236, 253, 245, 0.65));
+  backdrop-filter: blur(14px);
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.6;
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease both;
+}

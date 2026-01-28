@@ -8,6 +8,9 @@ export function errorHandler(err, req, res, next) {
     status = 400;
     messageKey = "errors.validation";
   }
+  if (status >= 500) {
+    console.error("Server error:", err?.messageKey || err?.message, err?.stack || err);
+  }
   const message = req.t ? req.t(messageKey) : "Internal error";
   const errors = err.errors || [];
 

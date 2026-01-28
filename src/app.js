@@ -24,6 +24,7 @@ import { cardApplicationsRouter, publicCardApplicationsRouter } from "./routes/c
 
 const app = express();
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
 
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cookieParser());

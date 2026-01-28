@@ -1,4 +1,6 @@
 .env
+admin/.env.local
+store-ui/.env.local
 node_modules/
 uploads/
 tmp_*

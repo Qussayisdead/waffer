@@ -37,6 +37,16 @@ type Statement = {
   }[];
 };
 
+type DailyRowDisplay = {
+  id: string;
+  bucket: string;
+  subtotal: string;
+  totalSales: string;
+  discountsGiven: string;
+  commissionsTotal: string;
+  invoiceCount: number;
+};
+
 export default function MonthlyStatementPage() {
   const { t } = useI18n();
   const [stores, setStores] = useState<Store[]>([]);
@@ -245,7 +255,7 @@ export default function MonthlyStatementPage() {
 
           <div>
             <h2 className="mb-3 text-lg font-semibold text-night">{t("reports.dailyBreakdown")}</h2>
-            <DataTable
+            <DataTable<DailyRowDisplay>
               columns={[
                 { key: "bucket", label: t("reports.period") },
                 { key: "subtotal", label: t("reports.subtotal") },
@@ -255,6 +265,7 @@ export default function MonthlyStatementPage() {
                 { key: "invoiceCount", label: t("reports.invoiceCount") }
               ]}
               rows={statement.daily.map((row) => ({
+                id: row.bucket,
                 ...row,
                 bucket: new Date(row.bucket).toLocaleDateString("ar-EG"),
                 subtotal: `${row.subtotal.toFixed(2)} ${currencySymbol}`,

@@ -61,7 +61,14 @@ export default function LandingPage() {
   useEffect(() => {
     const loadAds = async () => {
       try {
-        const response = await cachedRequest("/api/v1/public/ads", undefined, 60000);
+        type AdApiItem = {
+          title: string;
+          body: string;
+          link_url?: string | null;
+          image_url?: string | null;
+          created_at: string;
+        };
+        const response = await cachedRequest<AdApiItem[]>("/api/v1/public/ads", undefined, 60000);
         const items = response.data.map((item) => ({
           title: item.title,
           body: item.body,

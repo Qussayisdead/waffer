@@ -290,7 +290,7 @@ authRouter.post(
 
 authRouter.post(
   "/logout",
-  asyncHandler(async (_req, res) => {
+  asyncHandler(async (req, res) => {
     clearAuthCookies(res);
     ok(res, req.t("auth.loginSuccess"), { success: true });
   })

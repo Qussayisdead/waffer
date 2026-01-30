@@ -14,7 +14,7 @@ type Customer = {
   id: string;
   name_ar: string;
   phone?: string | null;
-  default_discount_percent: number;
+  default_discount_percent?: number;
 };
 
 type Store = {
@@ -50,8 +50,7 @@ export default function CustomersCardsPage() {
     name_ar: "",
     name_en: "",
     phone: "",
-    email: "",
-    default_discount_percent: 5
+    email: ""
   });
   const [cardForm, setCardForm] = useState({
     customer_id: "",
@@ -104,15 +103,14 @@ export default function CustomersCardsPage() {
         method: "POST",
         body: JSON.stringify({
           ...customerForm,
-          default_discount_percent: Number(customerForm.default_discount_percent)
+          default_discount_percent: 0
         })
       });
       setCustomerForm({
         name_ar: "",
         name_en: "",
         phone: "",
-        email: "",
-        default_discount_percent: 5
+        email: ""
       });
       await loadCustomers();
     } catch (err) {
@@ -126,18 +124,14 @@ export default function CustomersCardsPage() {
       setError(null);
       await apiRequest<Customer>(`/api/v1/customers/${editing.id}`, {
         method: "PATCH",
-        body: JSON.stringify({
-          ...customerForm,
-          default_discount_percent: Number(customerForm.default_discount_percent)
-        })
+        body: JSON.stringify(customerForm)
       });
       setEditing(null);
       setCustomerForm({
         name_ar: "",
         name_en: "",
         phone: "",
-        email: "",
-        default_discount_percent: 5
+        email: ""
       });
       await loadCustomers();
     } catch (err) {
@@ -260,17 +254,6 @@ export default function CustomersCardsPage() {
             value={customerForm.email}
             onChange={(event) => setCustomerForm({ ...customerForm, email: event.target.value })}
           />
-          <Input
-            label={t("customers.discount")}
-            type="number"
-            value={customerForm.default_discount_percent}
-            onChange={(event) =>
-              setCustomerForm({
-                ...customerForm,
-                default_discount_percent: Number(event.target.value)
-              })
-            }
-          />
         </div>
         <div className="mt-4 flex gap-3">
           {!editing ? (
@@ -294,8 +277,7 @@ export default function CustomersCardsPage() {
         columns={[
           { key: "id", label: "ID" },
           { key: "name_ar", label: t("customers.nameAr") },
-          { key: "phone", label: t("customers.phone") },
-          { key: "default_discount_percent", label: t("customers.discount") }
+          { key: "phone", label: t("customers.phone") }
         ]}
         rows={rows}
         renderActions={(row) => (
@@ -309,8 +291,7 @@ export default function CustomersCardsPage() {
                   name_ar: row.name_ar,
                   name_en: "",
                   phone: row.phone || "",
-                  email: "",
-                  default_discount_percent: row.default_discount_percent
+                  email: ""
                 });
               }}
             >

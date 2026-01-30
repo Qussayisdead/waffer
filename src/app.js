@@ -70,6 +70,10 @@ app.use((req, res, next) => {
   if (req.path.startsWith("/api/v1/public/")) {
     return next();
   }
+  const requestOrigin = req.headers.origin;
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    return next();
+  }
   const cookieToken = req.cookies?.csrf_token;
   const headerToken = req.get("X-CSRF-Token");
   if (!cookieToken || !headerToken || cookieToken !== headerToken) {

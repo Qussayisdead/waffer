@@ -63,7 +63,8 @@
     "generating": "Generating...",
     "expiresAt": "Expires at",
     "qrToken": "QR token",
-    "notReady": "Generate a new QR to use at the cashier"
+    "notReady": "Generate a new QR to use at the cashier",
+    "downloadQr": "Download QR"
   },
   "storeOtp": {
     "title": "Generate customer QR",

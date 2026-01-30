@@ -63,7 +63,8 @@
     "generating": "جار التوليد...",
     "expiresAt": "ينتهي عند",
     "qrToken": "رمز QR",
-    "notReady": "ولد رمز QR جديد لتقديمه للكاشير"
+    "notReady": "ولد رمز QR جديد لتقديمه للكاشير",
+    "downloadQr": "????? ??? QR"
   },
   "storeOtp": {
     "title": "توليد QR للعميل",

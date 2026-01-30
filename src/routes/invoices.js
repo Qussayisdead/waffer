@@ -55,8 +55,8 @@ invoicesRouter.post(
       throw httpError(403, "auth.forbidden");
     }
 
-    const customerPercent = Number(card.customer.default_discount_percent);
     const storeMax = Number(card.store.max_discount_percent);
+    const customerPercent = storeMax;
     const commissionPercent = Number(card.store.commission_percent || 0);
     const subtotal = Number(payload.subtotal);
     const { appliedPercent, discountAmount, total } = computeDiscount(subtotal, customerPercent, storeMax);

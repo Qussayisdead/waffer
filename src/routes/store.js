@@ -97,7 +97,7 @@ storeRouter.post(
 
     ok(res, req.t("card.fetched"), {
       customer_name: card.customer.name_ar || card.customer.name_en,
-      customer_discount_percent: Number(card.customer.default_discount_percent),
+      customer_discount_percent: Number(card.store.max_discount_percent),
       store_name: card.store.name_ar || card.store.name_en
     });
   })

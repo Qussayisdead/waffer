@@ -35,7 +35,8 @@
     "create": "Calculate discount",
     "final": "Final amount",
     "discountAmount": "Discount amount",
-    "printReceipt": "Print receipt"
+    "printReceipt": "Print receipt",
+    "pointsEarned": "Points earned"
   },
   "result": {
     "title": "Result",

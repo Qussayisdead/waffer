@@ -9,6 +9,7 @@ type ResultCardProps = {
   amount: number;
   discountAmount: number;
   finalAmount: number;
+  pointsEarned: number;
 };
 
 export function ResultCard({
@@ -17,7 +18,8 @@ export function ResultCard({
   discountPercent,
   amount,
   discountAmount,
-  finalAmount
+  finalAmount,
+  pointsEarned
 }: ResultCardProps) {
   const { t } = useI18n();
 
@@ -52,6 +54,7 @@ export function ResultCard({
             <div class="row"><span>${t("invoice.discountAmount")}</span><span>${discountAmount.toFixed(2)} ₪</span></div>
             <div class="row total"><span>${t("invoice.final")}</span><span>${finalAmount.toFixed(2)} ₪</span></div>
             <div class="promo">${congrats}</div>
+            <div class="promo">${t("invoice.pointsEarned")}: ${pointsEarned}</div>
             <div class="meta">${now}</div>
           </div>
           <script>
@@ -98,7 +101,12 @@ export function ResultCard({
         <span>{finalAmount.toFixed(2)} ₪</span>
       </div>
       <div className="mt-4 flex items-center justify-between">
-        <p className="text-sm text-mint">{t("result.success")}</p>
+        <div className="text-sm text-mint">
+          <div>{t("result.success")}</div>
+          <div className="text-xs text-night/70">
+            {t("invoice.pointsEarned")}: {pointsEarned}
+          </div>
+        </div>
         <button
           type="button"
           className="rounded-xl border border-night/20 px-4 py-2 text-sm text-night"

@@ -106,7 +106,8 @@ export default function StoreTerminalPage() {
   const [hasSearched, setHasSearched] = useState(false);
   const [result, setResult] = useState({
     discountAmount: 0,
-    finalAmount: 0
+    finalAmount: 0,
+    pointsEarned: 0
   });
   const [profile, setProfile] = useState<{ name: string; storeName: string | null } | null>(
     null
@@ -273,7 +274,11 @@ export default function StoreTerminalPage() {
       const response = await apiRequest<{
         applied_discount_percent: number;
         customer_name: string;
-        invoice: { discount_amount: number | string; total: number | string };
+        invoice: {
+          discount_amount: number | string;
+          total: number | string;
+          points_earned: number;
+        };
         store_name: string | null;
       }>("/api/v1/invoices/scan", {
         method: "POST",
@@ -285,7 +290,8 @@ export default function StoreTerminalPage() {
       });
       setResult({
         discountAmount: Number(response.data.invoice.discount_amount),
-        finalAmount: Number(response.data.invoice.total)
+        finalAmount: Number(response.data.invoice.total),
+        pointsEarned: Number(response.data.invoice.points_earned || 0)
       });
       setScanData((prev) => ({
         ...prev,
@@ -694,6 +700,7 @@ export default function StoreTerminalPage() {
               amount={amount}
               discountAmount={result.discountAmount}
               finalAmount={result.finalAmount}
+              pointsEarned={result.pointsEarned}
             />
           )}
         </div>

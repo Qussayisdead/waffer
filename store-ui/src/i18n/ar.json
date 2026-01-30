@@ -35,7 +35,8 @@
     "create": "إصدار",
     "final": "المبلغ النهائي",
     "discountAmount": "قيمة الخصم",
-    "printReceipt": "طباعة الإيصال"
+    "printReceipt": "طباعة الإيصال",
+    "pointsEarned": "?????? ????????"
   },
   "result": {
     "title": "النتيجة",

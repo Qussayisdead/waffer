@@ -18,7 +18,7 @@ const CARD_TTL_MS = Number(process.env.CARD_TTL_MS || DEFAULT_CARD_TTL_MS);
 const CARD_EXPIRY_MS = Number.isFinite(CARD_TTL_MS) ? CARD_TTL_MS : DEFAULT_CARD_TTL_MS;
 
 try {
-  QRCode = require(path.resolve(process.cwd(), "admin/node_modules/qrcode"));
+  QRCode = require("qrcode");
 } catch {
   QRCode = null;
 }

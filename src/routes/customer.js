@@ -27,7 +27,7 @@ function generateToken(prefix) {
   return `${prefix}_${crypto.randomBytes(16).toString("hex")}`;
 }
 
-const DEFAULT_QR_OTP_TTL_MS = 2 * 60 * 1000;
+const DEFAULT_QR_OTP_TTL_MS = 5 * 60 * 1000;
 const QR_OTP_TTL_MS = Number(process.env.QR_OTP_TTL_MS || DEFAULT_QR_OTP_TTL_MS);
 const OTP_TTL_MS = Number.isFinite(QR_OTP_TTL_MS) ? QR_OTP_TTL_MS : DEFAULT_QR_OTP_TTL_MS;
 const otpLimiter = rateLimit({

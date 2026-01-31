@@ -57,6 +57,27 @@ export default function LandingPage() {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
   const [ads, setAds] = useState(defaultAds);
   const storesTrackRef = useRef<HTMLDivElement | null>(null);
+  const [isFaqOpen, setIsFaqOpen] = useState(false);
+  const [activeFaq, setActiveFaq] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      question: "كيف أحصل على بطاقة التوفير؟",
+      answer: "من صفحة طلب البطاقة، عبّي بياناتك وسيتواصل معك فريقنا لإصدار البطاقة."
+    },
+    {
+      question: "كيف أستخدم الخصم عند الكاشير؟",
+      answer: "اعرض الباركود أو رمز QR للكاشير وسيتم تطبيق الخصم مباشرة."
+    },
+    {
+      question: "هل هناك رسوم على العميل؟",
+      answer: "التسجيل مجاني، والخصومات تأتي من المتاجر المشاركة."
+    },
+    {
+      question: "هل الباركود يعمل مع ماسحات 1D؟",
+      answer: "نعم، الباركود من نوع Code128 ويعمل مع ماسحات 1D الحديثة."
+    }
+  ];
 
   useEffect(() => {
     const loadAds = async () => {
@@ -541,6 +562,75 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+        {isFaqOpen && (
+          <div
+            className="w-[320px] overflow-hidden rounded-3xl border border-emerald-200/60 bg-white/95 shadow-[0_25px_60px_rgba(0,0,0,0.22)] backdrop-blur"
+            dir="rtl"
+          >
+            <div className="flex items-center justify-between border-b border-emerald-100 px-5 py-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-emerald-600">FAQ</p>
+                <p className="text-lg font-semibold text-black">مساعد سريع</p>
+              </div>
+              <button
+                type="button"
+                className="rounded-full border border-emerald-200 px-3 py-1 text-xs text-emerald-700 hover:border-emerald-300"
+                onClick={() => setIsFaqOpen(false)}
+              >
+                إغلاق
+              </button>
+            </div>
+            <div className="max-h-[360px] space-y-3 overflow-y-auto px-5 py-4">
+              <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 text-sm text-emerald-900">
+                أهلاً بك! اختر سؤالاً لعرض الإجابة بسرعة.
+              </div>
+              <div className="grid gap-2">
+                {faqs.map((item, index) => (
+                  <button
+                    key={item.question}
+                    type="button"
+                    className={
+                      index === activeFaq
+                        ? "rounded-2xl border border-emerald-200 bg-white px-4 py-3 text-right text-sm text-black shadow-sm"
+                        : "rounded-2xl border border-transparent bg-emerald-50/40 px-4 py-3 text-right text-sm text-emerald-800 hover:border-emerald-200 hover:bg-white"
+                    }
+                    onClick={() => setActiveFaq(index)}
+                  >
+                    {item.question}
+                  </button>
+                ))}
+              </div>
+              {activeFaq !== null && (
+                <div className="rounded-2xl border border-black/5 bg-white px-4 py-3 text-sm text-black/80">
+                  {faqs[activeFaq].answer}
+                </div>
+              )}
+              <a
+                href="/vip-card-application"
+                className="block rounded-2xl bg-emerald-700 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-emerald-800"
+              >
+                قدّم طلبك الآن
+              </a>
+            </div>
+          </div>
+        )}
+        <button
+          type="button"
+          className="flex items-center gap-3 rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(16,185,129,0.4)] transition hover:bg-emerald-800"
+          onClick={() => setIsFaqOpen((prev) => !prev)}
+          aria-expanded={isFaqOpen}
+        >
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
+              <path d="M5 17l-1 4 4-1 9-9a2.8 2.8 0 0 0-4-4l-9 9z" />
+              <path d="M14 7l4 4" />
+            </svg>
+          </span>
+          {isFaqOpen ? "إخفاء المساعدة" : "مساعدة سريعة"}
+        </button>
+      </div>
     </div>
   );
 }

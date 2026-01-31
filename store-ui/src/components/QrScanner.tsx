@@ -72,7 +72,7 @@ export function QrScanner({ onScan }: QrScannerProps) {
       BarcodeFormat.QR_CODE,
       BarcodeFormat.CODE_128
     ]);
-    const reader = new BrowserMultiFormatReader(hints, 700);
+    const reader = new BrowserMultiFormatReader(hints, { delayBetweenScanAttempts: 700 });
     zxingRef.current = reader;
     reader.decodeFromVideoDevice(undefined, videoRef.current, (result, err, controls) => {
       if (!result) return;

@@ -65,7 +65,8 @@ export function QrScanner({ onScan }: QrScannerProps) {
   };
 
   const startZxingScan = async () => {
-    const { BrowserMultiFormatReader, BarcodeFormat, DecodeHintType } = await import("@zxing/browser");
+    const { BrowserMultiFormatReader } = await import("@zxing/browser");
+    const { BarcodeFormat, DecodeHintType } = await import("@zxing/library");
     const hints = new Map();
     hints.set(DecodeHintType.POSSIBLE_FORMATS, [
       BarcodeFormat.QR_CODE,

@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cachedRequest } from "../../lib/api";
 
-const brandName = "وفر كاش";
-
+const brandName = "????";
 const stores = [
   {
     name: "\u0628\u0646 \u0627\u0644\u062c\u0628\u0644",
@@ -60,7 +59,7 @@ export default function LandingPage() {
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [chatInput, setChatInput] = useState("");
-    const [chatMessages, setChatMessages] = useState<
+        const [chatMessages, setChatMessages] = useState<
     { id: number; role: "user" | "bot"; text: string }[]
   >([
     {
@@ -138,7 +137,7 @@ export default function LandingPage() {
     }
   ];
 
-    const respondToMessage = (input: string) => {
+        const respondToMessage = (input: string) => {
     const normalized = input.trim().toLowerCase();
     if (!normalized) return "???? ????? ???????? ?????.";
     if (normalized.includes("?????") || normalized.includes("vip") || normalized.includes("golden")) {
@@ -277,10 +276,8 @@ export default function LandingPage() {
               <img className="h-20 w-20 object-contain" src="/logo.png" alt="Logo" />
             </div>
             <div>
-              <p className="text-lg font-semibold text-black">???? ????????</p>
-              <p className="text-xs text-black/60">
-                رحلتك نحو التوفير تبدأ من هنا
-              </p>
+              <p className="text-lg font-semibold text-black">????? ????</p>
+              <p className="text-xs text-black/60">????? ??? ??????? ???? ?? ???</p>
             </div>
           </div>
           <a
@@ -458,9 +455,10 @@ export default function LandingPage() {
                 <a
                   className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
                   href="/vip-card-application"
-                >
-                  قدّم طلب البطاقة
-                </a>
+                className="block rounded-2xl bg-emerald-700 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-emerald-800"
+              >
+                ???? ??? ???????
+              </a>
                 <a className="text-sm font-semibold text-emerald-700" href="/choose-role">
                   اعرف المزيد
                 </a>
@@ -742,7 +740,7 @@ export default function LandingPage() {
                   className="rounded-2xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
                   onClick={handleChatSend}
                 >
-                  ????
+                  ?????
                 </button>
               </div>
               <div className="grid gap-2">
@@ -787,7 +785,7 @@ export default function LandingPage() {
               <path d="M14 7l4 4" />
             </svg>
           </span>
-          {isFaqOpen ? "????? ????????" : "???? ????????"}
+          {isFaqOpen ? "\u0625\u063a\u0644\u0627\u0642 \u0627\u0644\u0645\u0633\u0627\u0639\u062f\u0629" : "\u0645\u0633\u0627\u0639\u062f \u0633\u0631\u064a\u0639"}
         </button>
       </div>
     </div>

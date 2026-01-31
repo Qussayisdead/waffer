@@ -65,7 +65,8 @@
     "expiresAt": "ينتهي عند",
     "qrToken": "رمز QR",
     "notReady": "لم يتم إنشاء الرمز بعد. اضغط للتوليد.",
-    "downloadQr": "تنزيل رمز QR"
+    "downloadQr": "تنزيل رمز QR",
+    "barcodeLabel": "?????? 1D"
   },
   "storeOtp": {
     "title": "رمز QR للمتجر",

@@ -33,6 +33,8 @@ export function ResultCard({
     receiptWindow.document.write(`
       <html lang="ar" dir="rtl">
         <head>
+          <meta charset="utf-8" />
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
           <title>${t("invoice.printReceipt")}</title>
           <style>
             body { font-family: Tahoma, Arial, sans-serif; margin: 16px; }
@@ -47,12 +49,12 @@ export function ResultCard({
         <body>
           <div class="receipt">
             <div class="title">${t("result.title")}</div>
-            <div class="row"><span>${t("store.name")}</span><span>${storeName || "—"}</span></div>
+            <div class="row"><span>${t("store.name")}</span><span>${storeName || "-"}</span></div>
             <div class="row"><span>${t("customer.name")}</span><span>${customerName}</span></div>
             <div class="row"><span>${t("customer.discount")}</span><span>${discountPercent}%</span></div>
-            <div class="row"><span>${t("invoice.amount")}</span><span>${amount.toFixed(2)} ₪</span></div>
-            <div class="row"><span>${t("invoice.discountAmount")}</span><span>${discountAmount.toFixed(2)} ₪</span></div>
-            <div class="row total"><span>${t("invoice.final")}</span><span>${finalAmount.toFixed(2)} ₪</span></div>
+            <div class="row"><span>${t("invoice.amount")}</span><span>${amount.toFixed(2)} &#8362;</span></div>
+            <div class="row"><span>${t("invoice.discountAmount")}</span><span>${discountAmount.toFixed(2)} &#8362;</span></div>
+            <div class="row total"><span>${t("invoice.final")}</span><span>${finalAmount.toFixed(2)} &#8362;</span></div>
             <div class="promo">${congrats}</div>
             <div class="promo">${t("invoice.pointsEarned")}: ${pointsEarned}</div>
             <div class="meta">${now}</div>
@@ -87,18 +89,20 @@ export function ResultCard({
         </div>
         <div className="rounded-2xl border border-white/70 bg-white/70 p-4">
           <div className="text-xs text-night/60">{t("invoice.amount")}</div>
-          <div className="mt-2 text-lg font-semibold text-night">{amount.toFixed(2)} ₪</div>
+          <div className="mt-2 text-lg font-semibold text-night">
+            {amount.toFixed(2)} {"\u20aa"}
+          </div>
         </div>
         <div className="rounded-2xl border border-white/70 bg-white/70 p-4">
           <div className="text-xs text-night/60">{t("invoice.discountAmount")}</div>
           <div className="mt-2 text-lg font-semibold text-night">
-            {discountAmount.toFixed(2)} ₪
+            {discountAmount.toFixed(2)} {"\u20aa"}
           </div>
         </div>
       </div>
       <div className="mt-4 flex items-center justify-between rounded-2xl border border-mint/30 bg-mint/10 px-4 py-3 text-lg font-semibold text-night">
         <span>{t("invoice.final")}</span>
-        <span>{finalAmount.toFixed(2)} ₪</span>
+        <span>{finalAmount.toFixed(2)} {"\u20aa"}</span>
       </div>
       <div className="mt-4 flex items-center justify-between">
         <div className="text-sm text-mint">

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import JsBarcode from "jsbarcode";
 import { useI18n } from "../../../i18n";
 import { apiRequest, cachedRequest, invalidateCache } from "../../../lib/api";
 import { Button } from "../../../components/Button";
@@ -72,6 +73,7 @@ export default function CustomerDashboardPage() {
   const [redeemMessage, setRedeemMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [qrPng, setQrPng] = useState<string | null>(null);
+  const barcodeRef = useRef<SVGSVGElement | null>(null);
 
   const toSvgDataUrl = (svg: string) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
@@ -137,6 +139,20 @@ export default function CustomerDashboardPage() {
     loadCustomer();
     refreshPoints();
   }, [t]);
+
+  useEffect(() => {
+    if (!otp?.qr_token || !barcodeRef.current) return;
+    try {
+      JsBarcode(barcodeRef.current, otp.qr_token, {
+        format: "CODE128",
+        displayValue: false,
+        height: 60,
+        margin: 0
+      });
+    } catch {
+      // Ignore barcode render failures.
+    }
+  }, [otp?.qr_token]);
 
   const generateOtp = async (cardId: string) => {
     try {
@@ -429,6 +445,12 @@ export default function CustomerDashboardPage() {
                 ) : (
                   <span>{t("customerOtp.notReady")}</span>
                 )}
+              </div>
+            )}
+            {otp?.qr_token && (
+              <div className="mx-auto mt-4 w-72 rounded-2xl border border-emerald-300/70 bg-white/80 p-4">
+                <div className="mb-2 text-xs text-night/60">{t("customerOtp.barcodeLabel")}</div>
+                <svg ref={barcodeRef} className="h-16 w-full" />
               </div>
             )}
             <div className="mt-4 text-sm text-night">

@@ -258,7 +258,7 @@ const handleChatSend = () => {
       />
 
       <header className="relative z-10 px-6 pt-6">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-black/10 bg-white/80 px-6 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
+        <nav className="liquid-glass mx-auto flex max-w-6xl items-center justify-between rounded-full border border-black/10 bg-white/80 px-6 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.08)] backdrop-blur">
           <div className="flex items-center gap-3">
             <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-emerald-50 shadow-sm">
               <img className="h-20 w-20 object-contain" src="/logo.png" alt="Logo" />
@@ -680,7 +680,7 @@ const handleChatSend = () => {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
         {isFaqOpen && (
           <div
-            className="w-[320px] overflow-hidden rounded-3xl border border-emerald-200/60 bg-white/95 shadow-[0_25px_60px_rgba(0,0,0,0.22)] backdrop-blur"
+            className="liquid-glass w-[320px] overflow-hidden rounded-3xl border border-emerald-200/60 bg-white/95 shadow-[0_25px_60px_rgba(0,0,0,0.22)] backdrop-blur"
             dir="rtl"
           >
             <div className="flex items-center justify-between border-b border-emerald-100 px-5 py-4">

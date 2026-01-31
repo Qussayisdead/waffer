@@ -41,7 +41,7 @@
   "result": {
     "title": "النتيجة",
     "success": "تم تطبيق الخصم بنجاح",
-    "congrats": "مبروك {customer}! لقد وفرت {amount}"
+    "congrats": "مبروك {customer}، لقد وفرت {amount}"
   },
   "errors": {
     "generic": "حدث خطأ غير متوقع",

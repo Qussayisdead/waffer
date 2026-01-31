@@ -125,9 +125,11 @@ export default function CustomerDashboardPage() {
     try {
       JsBarcode(barcodeRef.current, otp.qr_token, {
         format: "CODE128",
-        displayValue: false,
-        height: 60,
-        margin: 0
+        displayValue: true,
+        fontSize: 14,
+        height: 80,
+        margin: 8,
+        width: 2
       });
     } catch {
       // Ignore barcode render failures.

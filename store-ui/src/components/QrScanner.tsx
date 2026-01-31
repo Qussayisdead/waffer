@@ -72,6 +72,7 @@ export function QrScanner({ onScan }: QrScannerProps) {
       BarcodeFormat.QR_CODE,
       BarcodeFormat.CODE_128
     ]);
+    hints.set(DecodeHintType.TRY_HARDER, true);
     const reader = new BrowserMultiFormatReader(hints, { delayBetweenScanAttempts: 700 });
     if (!videoRef.current) {
       setError(t("scan.notSupported"));

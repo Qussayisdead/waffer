@@ -8,7 +8,7 @@ import { Field } from "../../../components/Field";
 import { InvoiceForm } from "../../../components/InvoiceForm";
 import { ResultCard } from "../../../components/ResultCard";
 import { useI18n } from "../../../i18n";
-import { apiRequest, cachedRequest, invalidateCache } from "../../../lib/api";
+import { apiRequest, cachedRequest, clearAccessToken, invalidateCache } from "../../../lib/api";
 import { StoreSidebar } from "../../../components/StoreSidebar";
 
 type ScanData = {
@@ -379,6 +379,7 @@ export default function StoreTerminalPage() {
                 try {
                   await apiRequest("/api/v1/auth/logout", { method: "POST" });
                 } finally {
+                  clearAccessToken();
                   window.location.href = "/login";
                 }
               }}

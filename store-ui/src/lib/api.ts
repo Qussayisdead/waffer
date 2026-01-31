@@ -6,6 +6,7 @@ type ApiResponse<T> = {
 };
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
+const ACCESS_TOKEN_KEY = "access_token";
 const cacheStore = new Map<string, { expiresAt: number; payload: ApiResponse<unknown> }>();
 
 function isSafeMethod(method?: string) {
@@ -23,6 +24,24 @@ function getCookieValue(name: string) {
 
 export function getCsrfToken() {
   return getCookieValue("csrf_token");
+}
+
+function getAccessToken() {
+  if (typeof window === "undefined") return null;
+  return window.localStorage.getItem(ACCESS_TOKEN_KEY);
+}
+
+export function setAccessToken(token?: string | null) {
+  if (typeof window === "undefined") return;
+  if (!token) {
+    window.localStorage.removeItem(ACCESS_TOKEN_KEY);
+    return;
+  }
+  window.localStorage.setItem(ACCESS_TOKEN_KEY, token);
+}
+
+export function clearAccessToken() {
+  setAccessToken(null);
 }
 
 function buildCacheKey(path: string) {
@@ -59,6 +78,13 @@ export async function apiRequest<T>(
 ): Promise<ApiResponse<T>> {
   const method = options?.method?.toUpperCase() || "GET";
   const csrfToken = !isSafeMethod(method) ? getCsrfToken() : null;
+  const authToken = getAccessToken();
+  const extraHeaders =
+    options?.headers instanceof Headers
+      ? Object.fromEntries(options.headers.entries())
+      : Array.isArray(options?.headers)
+        ? Object.fromEntries(options.headers)
+        : options?.headers;
   let response: Response;
   try {
     response = await fetch(`${baseUrl}${path}`, {
@@ -66,7 +92,8 @@ export async function apiRequest<T>(
       headers: {
         "Content-Type": "application/json",
         ...(csrfToken ? { "X-CSRF-Token": csrfToken } : {}),
-        ...(options?.headers || {})
+        ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+        ...(extraHeaders || {})
       },
       ...options
     });

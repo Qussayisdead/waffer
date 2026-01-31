@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useI18n } from "../../../admin/i18n";
-import { apiRequest } from "../../../lib/api";
+import { apiRequest, setAccessToken } from "../../../lib/api";
 import { Button } from "../../../admin/components/Button";
 import { Input } from "../../../admin/components/Input";
 import { ErrorBanner } from "../../../admin/components/ErrorBanner";
@@ -21,6 +21,7 @@ export default function LoginPage() {
         method: "POST",
         body: JSON.stringify(form)
       });
+      setAccessToken(response.data.token);
       router.replace("/admin");
     } catch (err) {
       setError(t((err as Error).message));

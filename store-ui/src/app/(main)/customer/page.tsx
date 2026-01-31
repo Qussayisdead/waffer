@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import JsBarcode from "jsbarcode";
 import { useI18n } from "../../../i18n";
-import { apiRequest, cachedRequest, invalidateCache } from "../../../lib/api";
+import { apiRequest, cachedRequest, clearAccessToken, invalidateCache } from "../../../lib/api";
 import { Button } from "../../../components/Button";
 
 type Store = {
@@ -217,6 +217,7 @@ export default function CustomerDashboardPage() {
               try {
                 await apiRequest("/api/v1/auth/logout", { method: "POST" });
               } finally {
+                clearAccessToken();
                 window.location.href = "/customer/login";
               }
             }}

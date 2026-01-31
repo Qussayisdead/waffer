@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useI18n } from "../../../../i18n";
-import { apiRequest } from "../../../../lib/api";
+import { apiRequest, setAccessToken } from "../../../../lib/api";
 import { Button } from "../../../../components/Button";
 import { Field } from "../../../../components/Field";
 
@@ -23,6 +23,7 @@ export default function CustomerLoginPage() {
           password: form.password
         })
       });
+      setAccessToken(response.data.token);
       router.replace("/customer");
     } catch (err) {
       setError(t((err as Error).message));

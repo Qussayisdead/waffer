@@ -37,6 +37,7 @@ export function QrScanner({ onScan }: QrScannerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<number | null>(null);
+  const zxingRef = useRef<null | { reset: () => void }>(null);
   const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastRaw, setLastRaw] = useState<string | null>(null);
@@ -52,6 +53,10 @@ export function QrScanner({ onScan }: QrScannerProps) {
       window.clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
+    if (zxingRef.current) {
+      zxingRef.current.reset();
+      zxingRef.current = null;
+    }
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
@@ -59,43 +64,69 @@ export function QrScanner({ onScan }: QrScannerProps) {
     setIsActive(false);
   };
 
+  const startZxingScan = async () => {
+    const { BrowserMultiFormatReader, BarcodeFormat, DecodeHintType } = await import("@zxing/browser");
+    const hints = new Map();
+    hints.set(DecodeHintType.POSSIBLE_FORMATS, [
+      BarcodeFormat.QR_CODE,
+      BarcodeFormat.CODE_128
+    ]);
+    const reader = new BrowserMultiFormatReader(hints, 700);
+    zxingRef.current = reader;
+    reader.decodeFromVideoDevice(undefined, videoRef.current, (result, err, controls) => {
+      if (!result) return;
+      const raw = result.getText();
+      setLastRaw(raw);
+      const payload = parsePayload(raw);
+      if (payload) {
+        onScan(payload);
+        controls.stop();
+        stopScan();
+      } else {
+        setError(t("scan.invalid"));
+      }
+    });
+  };
+
   const startScan = async () => {
     try {
       setError(null);
-      if (!supportsDetector) {
-        setError(t("scan.notSupported"));
+      if (supportsDetector) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "environment" }
+        });
+        streamRef.current = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          await videoRef.current.play();
+        }
+
+        const Detector = (window as BarcodeDetectorGlobal).BarcodeDetector;
+        if (!Detector) {
+          setError(t("scan.notSupported"));
+          return;
+        }
+        const detector = new Detector({ formats: ["qr_code", "code_128"] });
+        intervalRef.current = window.setInterval(async () => {
+          if (!videoRef.current) return;
+          const codes = await detector.detect(videoRef.current);
+          if (codes.length > 0) {
+            const raw = codes[0].rawValue;
+            setLastRaw(raw);
+            const payload = parsePayload(raw);
+            if (payload) {
+              onScan(payload);
+              stopScan();
+            } else {
+              setError(t("scan.invalid"));
+            }
+          }
+        }, 700);
+        setIsActive(true);
         return;
-      }
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" }
-      });
-      streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
       }
 
-      const Detector = (window as BarcodeDetectorGlobal).BarcodeDetector;
-      if (!Detector) {
-        setError(t("scan.notSupported"));
-        return;
-      }
-      const detector = new Detector({ formats: ["qr_code"] });
-      intervalRef.current = window.setInterval(async () => {
-        if (!videoRef.current) return;
-        const codes = await detector.detect(videoRef.current);
-        if (codes.length > 0) {
-          const raw = codes[0].rawValue;
-          setLastRaw(raw);
-          const payload = parsePayload(raw);
-          if (payload) {
-            onScan(payload);
-            stopScan();
-          } else {
-            setError(t("scan.invalid"));
-          }
-        }
-      }, 700);
+      await startZxingScan();
       setIsActive(true);
     } catch {
       setError(t("errors.camera"));
@@ -114,7 +145,7 @@ export function QrScanner({ onScan }: QrScannerProps) {
           setError(t("scan.notSupported"));
           return;
         }
-        const detector = new Detector({ formats: ["qr_code"] });
+        const detector = new Detector({ formats: ["qr_code", "code_128"] });
         const codes = await detector.detect(bitmap);
         if (codes.length > 0) {
           const raw = codes[0].rawValue;
@@ -124,6 +155,22 @@ export function QrScanner({ onScan }: QrScannerProps) {
             onScan(payload);
             return;
           }
+        }
+      } else {
+        const { BrowserMultiFormatReader } = await import("@zxing/browser");
+        const reader = new BrowserMultiFormatReader();
+        const url = URL.createObjectURL(file);
+        try {
+          const result = await reader.decodeFromImageUrl(url);
+          const raw = result.getText();
+          setLastRaw(raw);
+          const payload = parsePayload(raw);
+          if (payload) {
+            onScan(payload);
+            return;
+          }
+        } finally {
+          URL.revokeObjectURL(url);
         }
       }
       const formData = new FormData();

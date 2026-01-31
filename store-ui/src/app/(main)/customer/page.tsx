@@ -128,9 +128,9 @@ export default function CustomerDashboardPage() {
         format: "CODE128",
         displayValue: true,
         fontSize: 14,
-        height: 80,
-        margin: 8,
-        width: 2
+        height: 120,
+        margin: 12,
+        width: 3
       });
     } catch {
       // Ignore barcode render failures.
@@ -416,9 +416,9 @@ export default function CustomerDashboardPage() {
               </div>
             )}
             {otp?.qr_token && (
-              <div className="mx-auto mt-4 w-72 rounded-2xl border border-emerald-300/70 bg-white/80 p-4">
+              <div className="mx-auto mt-4 w-full max-w-xl rounded-2xl border border-emerald-300/70 bg-white/80 p-4">
                 <div className="mb-2 text-xs text-night/60">{t("customerOtp.barcodeLabel")}</div>
-                <svg ref={barcodeRef} className="h-16 w-full" />
+                <svg ref={barcodeRef} className="h-24 w-full" />
               </div>
             )}
             {otp?.qr_svg && (

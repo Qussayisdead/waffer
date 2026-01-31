@@ -347,7 +347,7 @@ export default function StoreTerminalPage() {
     <div className="relative min-h-screen overflow-hidden px-6 py-10">
       <div className="bg-orb -right-32 top-20 h-64 w-64 bg-mint/30" />
       <div className="bg-orb -left-20 top-1/2 h-72 w-72 bg-amber-200/50" />
-      <div className="mx-auto flex max-w-7xl gap-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row lg:gap-8">
         <StoreSidebar
           greeting={profile?.name || ""}
           activeId={activeSection}
@@ -398,6 +398,32 @@ export default function StoreTerminalPage() {
               </div>
             )}
           </header>
+          <div className="lg:hidden">
+            <div className="rounded-3xl border border-white/70 bg-white/70 px-4 py-3 shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {[
+                  { id: "store-summary", label: t("storeNav.summary") },
+                  { id: "store-otp", label: t("storeNav.qr") },
+                  { id: "store-invoices", label: t("storeNav.invoices") },
+                  { id: "store-search", label: t("storeNav.search") },
+                  { id: "store-scans", label: t("storeNav.scans") }
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleSectionSelect(item.id)}
+                    className={
+                      item.id === activeSection
+                        ? "shrink-0 rounded-2xl border border-emerald-300 bg-white/90 px-4 py-2 text-sm text-night"
+                        : "shrink-0 rounded-2xl border border-transparent px-4 py-2 text-sm text-night/70 hover:border-emerald-300 hover:bg-white/90"
+                    }
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
 
           {activeSection === "store-summary" && (
             <section

@@ -60,7 +60,7 @@ export default function LandingPage() {
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [chatInput, setChatInput] = useState("");
-  const [chatMessages, setChatMessages] = useState<
+    const [chatMessages, setChatMessages] = useState<
     { id: number; role: "user" | "bot"; text: string }[]
   >([
     {
@@ -70,7 +70,7 @@ export default function LandingPage() {
     }
   ]);
 
-  const faqs = [
+    const faqs = [
     {
       question: "??? ???? ????? ????? ??????? ?????",
       answer:
@@ -138,7 +138,7 @@ export default function LandingPage() {
     }
   ];
 
-  const respondToMessage = (input: string) => {
+    const respondToMessage = (input: string) => {
     const normalized = input.trim().toLowerCase();
     if (!normalized) return "???? ????? ???????? ?????.";
     if (normalized.includes("?????") || normalized.includes("vip") || normalized.includes("golden")) {
@@ -302,7 +302,7 @@ export default function LandingPage() {
               <h1 className="text-4xl font-semibold leading-tight text-black md:text-5xl">
                 {brandName}
                 <span className="block text-emerald-700">
-                  وفّر ... اشتري اكثر, وادفع أقل!
+                 <br></br> وفّر ... اشتري اكثر, وادفع أقل!
                 </span>
               </h1>
               <p className="max-w-xl text-lg leading-relaxed text-black/70">

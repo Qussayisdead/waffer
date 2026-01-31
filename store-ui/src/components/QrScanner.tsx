@@ -37,7 +37,7 @@ export function QrScanner({ onScan }: QrScannerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<number | null>(null);
-  const zxingRef = useRef<null | { reset: () => void }>(null);
+  const zxingRef = useRef<null | import("@zxing/browser").IScannerControls>(null);
   const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastRaw, setLastRaw] = useState<string | null>(null);
@@ -54,7 +54,7 @@ export function QrScanner({ onScan }: QrScannerProps) {
       intervalRef.current = null;
     }
     if (zxingRef.current) {
-      zxingRef.current.reset();
+      zxingRef.current.stop();
       zxingRef.current = null;
     }
     if (streamRef.current) {
@@ -73,20 +73,23 @@ export function QrScanner({ onScan }: QrScannerProps) {
       BarcodeFormat.CODE_128
     ]);
     const reader = new BrowserMultiFormatReader(hints, { delayBetweenScanAttempts: 700 });
-    zxingRef.current = reader;
-    reader.decodeFromVideoDevice(undefined, videoRef.current, (result, err, controls) => {
+    if (!videoRef.current) {
+      setError(t("scan.notSupported"));
+      return;
+    }
+    const controls = await reader.decodeFromVideoDevice(undefined, videoRef.current, (result) => {
       if (!result) return;
       const raw = result.getText();
       setLastRaw(raw);
       const payload = parsePayload(raw);
       if (payload) {
         onScan(payload);
-        controls.stop();
         stopScan();
       } else {
         setError(t("scan.invalid"));
       }
     });
+    zxingRef.current = controls;
   };
 
   const startScan = async () => {

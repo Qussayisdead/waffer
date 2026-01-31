@@ -458,10 +458,9 @@ export default function LandingPage() {
                 <a
                   className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
                   href="/vip-card-application"
-                className="block rounded-2xl bg-emerald-700 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-emerald-800"
-              >
-                ???? ??? ???????
-              </a>
+                >
+                  قدّم طلب البطاقة
+                </a>
                 <a className="text-sm font-semibold text-emerald-700" href="/choose-role">
                   اعرف المزيد
                 </a>

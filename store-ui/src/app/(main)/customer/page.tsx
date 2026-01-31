@@ -72,27 +72,7 @@ export default function CustomerDashboardPage() {
   const [redeemLoading, setRedeemLoading] = useState(false);
   const [redeemMessage, setRedeemMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [qrPng, setQrPng] = useState<string | null>(null);
   const barcodeRef = useRef<SVGSVGElement | null>(null);
-
-  const toSvgDataUrl = (svg: string) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-
-  const svgToPng = async (svg: string) => {
-    const img = new Image();
-    const svgUrl = toSvgDataUrl(svg);
-    img.src = svgUrl;
-    await new Promise((resolve, reject) => {
-      img.onload = resolve;
-      img.onerror = reject;
-    });
-    const canvas = document.createElement("canvas");
-    canvas.width = 220;
-    canvas.height = 220;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return null;
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL("image/png");
-  };
 
   const refreshPoints = async (force = false) => {
     try {
@@ -162,12 +142,6 @@ export default function CustomerDashboardPage() {
         method: "POST"
       });
       setOtp(response.data);
-      if (response.data.qr_svg) {
-        const png = await svgToPng(response.data.qr_svg);
-        setQrPng(png);
-      } else {
-        setQrPng(null);
-      }
     } catch (err) {
       setError(t((err as Error).message));
     } finally {
@@ -434,17 +408,13 @@ export default function CustomerDashboardPage() {
             <p className="mt-2 text-sm text-night/60">
               استخدم رمز QR لدى الكاشير للحصول على خصمك.
             </p>
-            {otp?.qr_svg ? (
-              <div className="mx-auto mt-6 w-48 rounded-2xl border border-emerald-400/70 bg-emerald-100/80 p-4">
-                <img src={toSvgDataUrl(otp.qr_svg)} alt="QR" className="h-40 w-40" />
+            {otp?.qr_token ? (
+              <div className="mt-6 rounded-2xl border border-emerald-400/70 bg-emerald-100/80 px-4 py-6 text-sm text-night/60">
+                <span>{t("customerOtp.qrToken")}: {otp.qr_token}</span>
               </div>
             ) : (
               <div className="mt-6 rounded-2xl border border-emerald-400/70 bg-emerald-100/80 px-4 py-6 text-sm text-night/60">
-                {otp?.qr_token ? (
-                  <span>{t("customerOtp.qrToken")}: {otp.qr_token}</span>
-                ) : (
-                  <span>{t("customerOtp.notReady")}</span>
-                )}
+                <span>{t("customerOtp.notReady")}</span>
               </div>
             )}
             {otp?.qr_token && (
@@ -466,17 +436,6 @@ export default function CustomerDashboardPage() {
                 </div>
               )}
             </div>
-            {qrPng && (
-              <div className="mt-4">
-                <a
-                  className="rounded-2xl border border-emerald-300/70 bg-white/80 px-4 py-2 text-sm text-emerald-700 hover:border-emerald-400"
-                  href={qrPng}
-                  download={`qr-${card.card_number}.png`}
-                >
-                  {t("customerOtp.downloadQr")}
-                </a>
-              </div>
-            )}
             <div className="mt-6">
               <Button type="button" className="bg-emerald-700 text-white hover:bg-emerald-800" onClick={() => generateOtp(card.id)} disabled={isOtpLoading}>
                 {isOtpLoading ? t("customerOtp.generating") : t("customerOtp.generate")}

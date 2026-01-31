@@ -36,12 +36,12 @@
     "final": "المبلغ النهائي",
     "discountAmount": "قيمة الخصم",
     "printReceipt": "طباعة الإيصال",
-    "pointsEarned": "?????? ????????"
+    "pointsEarned": "النقاط المكتسبة"
   },
   "result": {
     "title": "النتيجة",
     "success": "تم تطبيق الخصم بنجاح",
-    "congrats": "????? {customer}! ??? ???? {amount}"
+    "congrats": "مبروك {customer}! لقد وفرت {amount}"
   },
   "errors": {
     "generic": "حدث خطأ غير متوقع",

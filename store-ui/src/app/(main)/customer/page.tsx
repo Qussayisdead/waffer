@@ -73,6 +73,7 @@ export default function CustomerDashboardPage() {
   const [redeemMessage, setRedeemMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const barcodeRef = useRef<SVGSVGElement | null>(null);
+  const toSvgDataUrl = (svg: string) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
   const refreshPoints = async (force = false) => {
     try {
@@ -200,13 +201,11 @@ export default function CustomerDashboardPage() {
         <header className="flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-emerald-200/70 bg-emerald-100/80 px-8 py-6 shadow-[0_18px_60px_rgba(15,23,42,0.08)]">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100/70 shadow-sm">
-              <img className="h-10 w-10 object-contain" src="/logo.png" alt="وفر كاش" />
+              <img className="h-10 w-10 object-contain" src="/logo.png" alt="Logo" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-ink">لوحة العميل</h1>
-              <p className="mt-1 text-sm text-night/60">
-                اختر المتجر ثم أنشئ بطاقة التوفير الرقمية.
-              </p>
+              <h1 className="text-2xl font-semibold text-ink">{t("customerDashboard.title")}</h1>
+              <p className="mt-1 text-sm text-night/60">{t("customerDashboard.subtitle")}</p>
               <div className="mt-2 text-sm text-night/70">
                 {t("common.hello")} {customerName || t("common.user")}
               </div>
@@ -224,7 +223,7 @@ export default function CustomerDashboardPage() {
               }
             }}
           >
-            تسجيل الخروج
+            {t("auth.logout")}
           </button>
         </header>
 
@@ -381,10 +380,8 @@ export default function CustomerDashboardPage() {
         </section>
 
         <section className="glass rounded-3xl border border-emerald-300/70 bg-emerald-100/80 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
-          <h2 className="text-lg font-semibold text-ink">المتاجر المتاحة</h2>
-          <p className="mt-2 text-sm text-night/60">
-            اختر المتجر الذي ترغب بالحصول على بطاقة التوفير الخاصة به.
-          </p>
+          <h2 className="text-lg font-semibold text-ink">{t("customerDashboard.issueTitle")}</h2>
+          <p className="mt-2 text-sm text-night/60">{t("customerDashboard.issueSubtitle")}</p>
           {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
           <div className="mt-4 flex flex-wrap items-center gap-4">
             <select
@@ -392,7 +389,7 @@ export default function CustomerDashboardPage() {
               value={selectedStore}
               onChange={(event) => setSelectedStore(event.target.value)}
             >
-              <option value="">اختر المتجر</option>
+              <option value="">{t("customerDashboard.selectStore")}</option>
               {stores.map((store) => (
                 <option key={store.id} value={store.id}>
                   {store.name_ar || store.name_en}
@@ -400,17 +397,15 @@ export default function CustomerDashboardPage() {
               ))}
             </select>
             <Button type="button" className="bg-emerald-700 text-white hover:bg-emerald-800" onClick={issueCard}>
-              إنشاء بطاقة
+              {t("customerDashboard.issueButton")}
             </Button>
           </div>
         </section>
 
         {card && (
           <section className="glass rounded-3xl border border-emerald-100/70 bg-white/90 p-6 text-center shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
-            <h3 className="text-lg font-semibold text-ink">بطاقة التوفير الخاصة بك</h3>
-            <p className="mt-2 text-sm text-night/60">
-              استخدم رمز QR لدى الكاشير للحصول على خصمك.
-            </p>
+            <h3 className="text-lg font-semibold text-ink">{t("customerDashboard.cardTitle")}</h3>
+            <p className="mt-2 text-sm text-night/60">{t("customerDashboard.cardSubtitle")}</p>
             {otp?.qr_token ? (
               <div className="mt-6 rounded-2xl border border-emerald-400/70 bg-emerald-100/80 px-4 py-6 text-sm text-night/60">
                 <span>{t("customerOtp.qrToken")}: {otp.qr_token}</span>
@@ -426,8 +421,14 @@ export default function CustomerDashboardPage() {
                 <svg ref={barcodeRef} className="h-16 w-full" />
               </div>
             )}
+            {otp?.qr_svg && (
+              <div className="mx-auto mt-4 w-48 rounded-2xl border border-emerald-300/70 bg-white/80 p-4">
+                <div className="mb-2 text-xs text-night/60">{t("customerOtp.qrLabel")}</div>
+                <img src={toSvgDataUrl(otp.qr_svg)} alt="QR" className="mx-auto h-32 w-32" />
+              </div>
+            )}
             <div className="mt-4 text-sm text-night">
-              <div>O?U,U. OU,O"O?OU,Oc: {card.card_number}</div>
+              <div>{t("customerDashboard.cardNumber")}: {card.card_number}</div>
               {otp?.qr_token && (
                 <div className="mt-1 break-all">
                   {t("customerOtp.qrToken")}: {otp.qr_token}

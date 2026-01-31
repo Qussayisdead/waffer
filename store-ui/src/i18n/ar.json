@@ -66,7 +66,8 @@
     "qrToken": "رمز QR",
     "notReady": "لم يتم إنشاء الرمز بعد. اضغط للتوليد.",
     "downloadQr": "تنزيل رمز QR",
-    "barcodeLabel": "باركود 1D"
+    "barcodeLabel": "باركود 1D",
+    "qrLabel": "رمز QR"
   },
   "storeOtp": {
     "title": "رمز QR للمتجر",
@@ -156,5 +157,16 @@
   "card": {
     "expired": "البطاقة منتهية",
     "inactive": "البطاقة غير مفعلة"
+  },
+  "customerDashboard": {
+    "title": "بطاقة التوفير الخاصة بك",
+    "subtitle": "اعرض الباركود أو رمز QR للكاشير للحصول على خصمك.",
+    "issueTitle": "إصدار بطاقة جديدة",
+    "issueSubtitle": "اختر المتجر الذي تريد إصدار البطاقة له.",
+    "selectStore": "اختر المتجر",
+    "issueButton": "إصدار البطاقة",
+    "cardTitle": "بطاقتك جاهزة",
+    "cardSubtitle": "اعرض الباركود أو رمز QR للكاشير للحصول على خصمك.",
+    "cardNumber": "رقم البطاقة"
   }
 }

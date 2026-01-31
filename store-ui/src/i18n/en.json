@@ -66,7 +66,19 @@
     "qrToken": "QR token",
     "notReady": "Generate a new QR to use at the cashier",
     "downloadQr": "Download QR",
-    "barcodeLabel": "1D barcode"
+    "barcodeLabel": "1D barcode",
+    "qrLabel": "QR code"
+  },
+  "customerDashboard": {
+    "title": "Your savings card",
+    "subtitle": "Show the barcode or QR to the cashier to get your discount.",
+    "issueTitle": "Issue a new card",
+    "issueSubtitle": "Choose the store you want the card for.",
+    "selectStore": "Select a store",
+    "issueButton": "Issue card",
+    "cardTitle": "Your card is ready",
+    "cardSubtitle": "Show the barcode or QR to the cashier to get your discount.",
+    "cardNumber": "Card number"
   },
   "storeOtp": {
     "title": "Generate customer QR",

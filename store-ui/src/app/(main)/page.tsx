@@ -59,6 +59,16 @@ export default function LandingPage() {
   const storesTrackRef = useRef<HTMLDivElement | null>(null);
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState<
+    { id: number; role: "user" | "bot"; text: string }[]
+  >([
+    {
+      id: 1,
+      role: "bot",
+      text: "مرحبًا! اسألني عن البطاقة أو الخصومات أو طريقة الاستخدام."
+    }
+  ]);
 
   const faqs = [
     {
@@ -78,6 +88,47 @@ export default function LandingPage() {
       answer: "نعم، الباركود من نوع Code128 ويعمل مع ماسحات 1D الحديثة."
     }
   ];
+
+  const respondToMessage = (input: string) => {
+    const normalized = input.trim().toLowerCase();
+    if (!normalized) return "فضلاً اكتب سؤالك وسأساعدك.";
+    if (normalized.includes("بطاقة") || normalized.includes("كارت")) {
+      return "تقدر تطلب البطاقة من صفحة الطلب، وبعدها نرسل لك تفاصيل الاستلام.";
+    }
+    if (normalized.includes("خصم") || normalized.includes("تخفيض")) {
+      return "الخصم يتطبق عند الكاشير بمجرد مسح الباركود أو QR.";
+    }
+    if (normalized.includes("نقاط")) {
+      return "النقاط تُحسب تلقائيًا بعد كل فاتورة ويمكنك استبدالها بقسائم.";
+    }
+    if (normalized.includes("تجديد") || normalized.includes("مدة") || normalized.includes("صلاحية")) {
+      return "رمز الاستخدام مؤقت، ويمكنك توليد رمز جديد في أي وقت.";
+    }
+    if (normalized.includes("متجر") || normalized.includes("محل")) {
+      return "تقدر تشوف المتاجر المشاركة من قسم المتاجر في الصفحة.";
+    }
+    if (normalized.includes("تواصل") || normalized.includes("دعم") || normalized.includes("مساعدة")) {
+      return "راسلنا عبر نموذج الطلب، أو اكتب لنا وسنرد بأسرع وقت.";
+    }
+    return "لم أفهم السؤال تمامًا، جرّب توضيح أكثر أو اختر سؤالًا من القائمة.";
+  };
+
+  const handleChatSend = () => {
+    const input = chatInput.trim();
+    if (!input) return;
+    const userMessage = {
+      id: Date.now(),
+      role: "user" as const,
+      text: input
+    };
+    const botMessage = {
+      id: Date.now() + 1,
+      role: "bot" as const,
+      text: respondToMessage(input)
+    };
+    setChatMessages((prev) => [...prev, userMessage, botMessage]);
+    setChatInput("");
+  };
 
   useEffect(() => {
     const loadAds = async () => {
@@ -584,7 +635,39 @@ export default function LandingPage() {
             </div>
             <div className="max-h-[360px] space-y-3 overflow-y-auto px-5 py-4">
               <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3 text-sm text-emerald-900">
-                أهلاً بك! اختر سؤالاً لعرض الإجابة بسرعة.
+                أهلاً بك! تقدر تسأل مباشرة أو تختار من الأسئلة السريعة.
+              </div>
+              <div className="space-y-3">
+                {chatMessages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={
+                      message.role === "user"
+                        ? "rounded-2xl border border-emerald-200 bg-emerald-600 px-4 py-3 text-sm text-white"
+                        : "rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm text-black/80"
+                    }
+                  >
+                    {message.text}
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <input
+                  className="w-full rounded-2xl border border-emerald-200 bg-white px-4 py-2 text-sm text-black outline-none focus:border-emerald-400"
+                  placeholder="اكتب سؤالك هنا..."
+                  value={chatInput}
+                  onChange={(event) => setChatInput(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") handleChatSend();
+                  }}
+                />
+                <button
+                  type="button"
+                  className="rounded-2xl bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800"
+                  onClick={handleChatSend}
+                >
+                  إرسال
+                </button>
               </div>
               <div className="grid gap-2">
                 {faqs.map((item, index) => (

@@ -74,6 +74,29 @@ export default function CustomerDashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const barcodeRef = useRef<SVGSVGElement | null>(null);
   const toSvgDataUrl = (svg: string) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  const sanitizeToken = (token: string) => token.replace(/[^a-zA-Z0-9-_]/g, "_");
+  const downloadSvg = (svgText: string, filename: string) => {
+    const blob = new Blob([svgText], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+  const handleDownloadBarcode = () => {
+    if (!barcodeRef.current || !otp?.qr_token) return;
+    const svgText = new XMLSerializer().serializeToString(barcodeRef.current);
+    const filename = `barcode-${sanitizeToken(otp.qr_token)}.svg`;
+    downloadSvg(svgText, filename);
+  };
+  const handleDownloadQr = () => {
+    if (!otp?.qr_svg || !otp?.qr_token) return;
+    const filename = `qr-${sanitizeToken(otp.qr_token)}.svg`;
+    downloadSvg(otp.qr_svg, filename);
+  };
 
   const refreshPoints = async (force = false) => {
     try {
@@ -419,12 +442,28 @@ export default function CustomerDashboardPage() {
               <div className="mx-auto mt-4 w-full max-w-xl rounded-2xl border border-emerald-300/70 bg-white/80 p-4">
                 <div className="mb-2 text-xs text-night/60">{t("customerOtp.barcodeLabel")}</div>
                 <svg ref={barcodeRef} className="h-24 w-full" />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="mt-3 border-emerald-200 px-4 py-2 text-sm text-emerald-700 hover:border-emerald-300"
+                  onClick={handleDownloadBarcode}
+                >
+                  {t("customerOtp.downloadBarcode")}
+                </Button>
               </div>
             )}
             {otp?.qr_svg && (
               <div className="mx-auto mt-4 w-48 rounded-2xl border border-emerald-300/70 bg-white/80 p-4">
                 <div className="mb-2 text-xs text-night/60">{t("customerOtp.qrLabel")}</div>
                 <img src={toSvgDataUrl(otp.qr_svg)} alt="QR" className="mx-auto h-32 w-32" />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="mt-3 border-emerald-200 px-4 py-2 text-sm text-emerald-700 hover:border-emerald-300"
+                  onClick={handleDownloadQr}
+                >
+                  {t("customerOtp.downloadQr")}
+                </Button>
               </div>
             )}
             <div className="mt-4 text-sm text-night">

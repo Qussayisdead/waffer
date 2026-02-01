@@ -66,6 +66,7 @@
     "qrToken": "QR token",
     "notReady": "Generate a new QR to use at the cashier",
     "downloadQr": "Download QR",
+    "downloadBarcode": "Download barcode",
     "barcodeLabel": "1D barcode",
     "qrLabel": "QR code"
   },

@@ -66,6 +66,7 @@
     "qrToken": "رمز QR",
     "notReady": "لم يتم إنشاء الرمز بعد. اضغط للتوليد.",
     "downloadQr": "تنزيل رمز QR",
+    "downloadBarcode": "تنزيل الباركود",
     "barcodeLabel": "باركود 1D",
     "qrLabel": "رمز QR"
   },

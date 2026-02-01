@@ -75,27 +75,41 @@ export default function CustomerDashboardPage() {
   const barcodeRef = useRef<SVGSVGElement | null>(null);
   const toSvgDataUrl = (svg: string) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   const sanitizeToken = (token: string) => token.replace(/[^a-zA-Z0-9-_]/g, "_");
-  const downloadSvg = (svgText: string, filename: string) => {
+  const downloadJpgFromSvg = (svgText: string, filename: string, width: number, height: number) => {
     const blob = new Blob([svgText], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+    const image = new Image();
+    image.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(image, 0, 0, width, height);
+        const jpegUrl = canvas.toDataURL("image/jpeg", 0.92);
+        const link = document.createElement("a");
+        link.href = jpegUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+      URL.revokeObjectURL(url);
+    };
+    image.src = url;
   };
   const handleDownloadBarcode = () => {
     if (!barcodeRef.current || !otp?.qr_token) return;
     const svgText = new XMLSerializer().serializeToString(barcodeRef.current);
-    const filename = `barcode-${sanitizeToken(otp.qr_token)}.svg`;
-    downloadSvg(svgText, filename);
+    const filename = `barcode-${sanitizeToken(otp.qr_token)}.jpg`;
+    downloadJpgFromSvg(svgText, filename, 1200, 360);
   };
   const handleDownloadQr = () => {
     if (!otp?.qr_svg || !otp?.qr_token) return;
-    const filename = `qr-${sanitizeToken(otp.qr_token)}.svg`;
-    downloadSvg(otp.qr_svg, filename);
+    const filename = `qr-${sanitizeToken(otp.qr_token)}.jpg`;
+    downloadJpgFromSvg(otp.qr_svg, filename, 512, 512);
   };
 
   const refreshPoints = async (force = false) => {

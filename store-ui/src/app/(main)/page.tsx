@@ -60,6 +60,8 @@ export default function LandingPage() {
   const [isFaqOpen, setIsFaqOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [chatInput, setChatInput] = useState("");
+  const [isHeroMuted, setIsHeroMuted] = useState(true);
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const [chatMessages, setChatMessages] = useState<
     { id: number; role: "user" | "bot"; text: string }[]
   >([
@@ -313,16 +315,34 @@ const handleChatSend = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[36px] border border-black/10 bg-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
+              <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[36px] border border-black/10 bg-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
                 <video
+                  ref={heroVideoRef}
                   className="h-full w-full object-cover"
-                  src="/video.mp4"
+                  src="/main-video.mp4"
                   autoPlay
                   loop
-                  muted
+                  muted={isHeroMuted}
                   playsInline
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-emerald-200/20" />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextMuted = !isHeroMuted;
+                    setIsHeroMuted(nextMuted);
+                    if (heroVideoRef.current) {
+                      heroVideoRef.current.muted = nextMuted;
+                      if (!nextMuted) {
+                        heroVideoRef.current.volume = 1;
+                        heroVideoRef.current.play().catch(() => {});
+                      }
+                    }
+                  }}
+                  className="absolute bottom-4 left-4 z-10 rounded-full bg-white/80 px-4 py-2 text-xs font-semibold text-black shadow-[0_8px_20px_rgba(0,0,0,0.18)] backdrop-blur transition hover:bg-white"
+                >
+                  {isHeroMuted ? "تشغيل الصوت" : "كتم الصوت"}
+                </button>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-emerald-200/20" />
               </div>
               <div className="absolute -bottom-8 right-6 rounded-3xl bg-white px-5 py-4 shadow-[0_20px_40px_rgba(0,0,0,0.12)]">
                 <p className="text-sm font-semibold text-black">

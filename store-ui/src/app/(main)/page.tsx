@@ -354,7 +354,7 @@ const handleChatSend = () => {
             ].map((stat) => (
               <div
                 data-reveal
-                className="rounded-3xl border border-black/10 bg-white p-6 text-center shadow-[0_16px_40px_rgba(0,0,0,0.08)] opacity-0 translate-y-6 scale-95 transition-all duration-700"
+                className="liquid-glass rounded-3xl border border-black/10 bg-white p-6 text-center shadow-[0_16px_40px_rgba(0,0,0,0.08)] opacity-0 translate-y-6 scale-95 transition-all duration-700"
                 key={stat.label}
               >
                 <p className="text-3xl font-semibold text-black">{stat.value}</p>
@@ -413,7 +413,7 @@ const handleChatSend = () => {
               ].map((step) => (
                 <div
                   data-reveal
-                  className="rounded-3xl border border-black/10 bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.08)] opacity-0 translate-y-6 scale-95 transition-all duration-700"
+                  className="liquid-glass rounded-3xl border border-black/10 bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.08)] opacity-0 translate-y-6 scale-95 transition-all duration-700"
                   key={step.title}
                 >
                   <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
@@ -441,14 +441,14 @@ const handleChatSend = () => {
                 <span className="rounded-full border border-black/10 bg-white px-4 py-2">عروض VIP</span>
                 <span className="rounded-full border border-black/10 bg-white px-4 py-2">دعم أولوية</span>
               </div>
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   className="rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700"
                   href="/vip-card-application"
                 >
                   اطلب البطاقة الذهبية
                 </a>
-                <a className="text-sm font-semibold text-emerald-700" href="/choose-role">
+                <a className="inline-flex items-center text-sm font-semibold text-emerald-700" href="/choose-role">
                   اعرف المزيد
                 </a>
               </div>
@@ -456,47 +456,15 @@ const handleChatSend = () => {
             <div className="relative">
               <div
                 data-reveal
-                className="relative overflow-hidden rounded-[32px] border border-amber-200/60 bg-gradient-to-br from-amber-100 via-yellow-200 to-amber-400 p-6 shadow-[0_30px_60px_rgba(0,0,0,0.18)] opacity-0 translate-y-6 scale-95 transition-all duration-700"
+                className="liquid-glass relative overflow-hidden rounded-[32px] border border-amber-200/60 bg-transparent p-6 shadow-[0_30px_60px_rgba(0,0,0,0.18)] opacity-0 translate-y-6 scale-95 transition-all duration-700"
               >
-                <svg viewBox="0 0 520 320" className="h-full w-full" role="img" aria-label="Golden QR code card">
-                  <defs>
-                    <linearGradient id="goldenCardGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#FDE68A" />
-                      <stop offset="45%" stopColor="#FBBF24" />
-                      <stop offset="100%" stopColor="#D97706" />
-                    </linearGradient>
-                    <linearGradient id="goldenCardGlow" x1="0" y1="1" x2="1" y2="0">
-                      <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
-                      <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-                    </linearGradient>
-                  </defs>
-                  <rect x="12" y="12" width="496" height="296" rx="28" fill="url(#goldenCardGradient)" />
-                  <rect x="28" y="28" width="464" height="264" rx="24" fill="url(#goldenCardGlow)" opacity="0.6" />
-                  <rect x="44" y="62" width="140" height="96" rx="14" fill="rgba(0,0,0,0.15)" />
-                  <rect x="58" y="76" width="36" height="36" rx="6" fill="rgba(0,0,0,0.35)" />
-                  <rect x="102" y="76" width="68" height="12" rx="6" fill="rgba(0,0,0,0.28)" />
-                  <rect x="102" y="96" width="68" height="12" rx="6" fill="rgba(0,0,0,0.28)" />
-                  <rect x="58" y="126" width="112" height="12" rx="6" fill="rgba(0,0,0,0.28)" />
-                  <rect x="320" y="72" width="140" height="140" rx="18" fill="rgba(0,0,0,0.2)" />
-                  <rect x="336" y="88" width="36" height="36" rx="6" fill="rgba(255,255,255,0.7)" />
-                  <rect x="380" y="88" width="64" height="12" rx="6" fill="rgba(255,255,255,0.7)" />
-                  <rect x="380" y="108" width="64" height="12" rx="6" fill="rgba(255,255,255,0.7)" />
-                  <rect x="336" y="132" width="108" height="12" rx="6" fill="rgba(255,255,255,0.7)" />
-                  <rect x="336" y="152" width="108" height="12" rx="6" fill="rgba(255,255,255,0.7)" />
-                  <rect x="336" y="172" width="108" height="12" rx="6" fill="rgba(255,255,255,0.7)" />
-                  <text x="56" y="214" fill="rgba(0,0,0,0.55)" fontSize="18" fontWeight="600">
-                    GOLDEN VIP CARD
-                  </text>
-                  <text x="56" y="246" fill="rgba(0,0,0,0.4)" fontSize="14">
-                    5288 9031 4521 1149
-                  </text>
-                  <text x="56" y="272" fill="rgba(0,0,0,0.4)" fontSize="12">
-                    VALID 12/28
-                  </text>
-                </svg>
-              </div>
-              <div className="absolute -bottom-6 left-6 rounded-2xl border border-amber-200/60 bg-white/80 px-4 py-3 text-xs font-semibold text-black shadow-[0_15px_35px_rgba(0,0,0,0.15)] backdrop-blur">
-                يشمل عضوية المستوى الذهبي
+                
+                <img
+                  src="/vip-waffer.png"
+                  alt="\u0628\u0637\u0627\u0642\u0629 \u0643\u0628\u0627\u0631 \u0627\u0644\u0639\u0645\u0644\u0627\u0621"
+                  className="h-full w-full rounded-2xl object-contain"
+                />
+              
               </div>
             </div>
           </div>

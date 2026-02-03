@@ -6,7 +6,10 @@ import { RequireAuth } from "../../admin/components/RequireAuth";
 
 export const metadata: Metadata = {
   title: "Smart Savings Card Admin",
-  description: "Admin dashboard"
+  description: "Admin dashboard",
+  icons: {
+    icon: "/logo.png"
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

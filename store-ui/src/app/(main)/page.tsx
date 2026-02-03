@@ -324,6 +324,9 @@ const handleChatSend = () => {
                   loop
                   muted={isHeroMuted}
                   playsInline
+                  onEnded={() => {
+                    heroVideoRef.current?.play().catch(() => {});
+                  }}
                 />
                 <button
                   type="button"

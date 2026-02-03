@@ -5,7 +5,10 @@ import { RequireAuth } from "../components/RequireAuth";
 
 export const metadata: Metadata = {
   title: "وفّر كاش",
-  description: "منصة خصومات للمتاجر والعملاء"
+  description: "منصة خصومات للمتاجر والعملاء",
+  icons: {
+    icon: "/logo.png"
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
